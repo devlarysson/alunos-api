@@ -7,7 +7,7 @@ describe('AlunoService', () => {
   let service: AlunoService;
   let repository: AlunoRepository;
 
-  const alunoArrMock: Aluno[] = [
+  const alunos: Aluno[] = [
     {
       id: 1,
       nome: 'Larysson',
@@ -23,48 +23,50 @@ describe('AlunoService', () => {
   ];
 
   const mockAlunoRepository = {
-    listarTodos: () => {},
-    filtrarBusca: (busca: string) => {},
+    listarTodos: () => alunos,
+    filtrarBusca: (busca: string) => alunos.filter((aluno) => aluno.nome.includes(busca)),
   };
 
   const configAlunoRepository = {
     provide: AlunoRepository,
-    useValue: mockAlunoRepository,
+    useValue: {
+      listarTodos: () => alunos,
+      filtrarBusca: (busca: string) => {
+        return alunos.filter((aluno) => aluno.nome.includes(busca));
+      },
+    },
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AlunoService, AlunoRepository, configAlunoRepository],
+      providers: [AlunoService, configAlunoRepository],
     }).compile();
 
     service = module.get<AlunoService>(AlunoService);
     repository = module.get<AlunoRepository>(AlunoRepository);
   });
 
-  it('should service to be defined', () => {
+  it('deve estar definido os providers', () => {
     expect(service).toBeDefined();
-  });
-
-  it('should repository to be defined', () => {
     expect(repository).toBeDefined();
   });
 
-  it('should return all Aluno array', async () => {
-    jest.spyOn(repository, 'listarTodos').mockResolvedValue(alunoArrMock);
+  it('deve retornar uma lista com todos os alunos', async () => {
+    jest.spyOn(repository, 'listarTodos').mockResolvedValue(mockAlunoRepository.listarTodos());
 
     const alunos: Aluno[] = await service.buscarTodos();
 
-    expect(alunos).toEqual(alunoArrMock);
+    expect(alunos).toEqual(alunos);
   });
 
-  it('should return only one element of Aluno array', async () => {
-    const busca = 'Descomplica'
-    const alunoArrMockFiltrado: Aluno[] = alunoArrMock.filter(aluno => aluno.nome.includes(busca))
+  it('deve retornar uma lista de alunos filtrado por uma busca', async () => {
+    const busca = 'Descomplica';
+    const alunosFiltrados = mockAlunoRepository.filtrarBusca(busca);
 
-    jest.spyOn(repository, 'filtrarBusca').mockResolvedValue(alunoArrMockFiltrado);
+    jest.spyOn(repository, 'filtrarBusca').mockResolvedValue(alunosFiltrados);
 
     const alunos: Aluno[] = await service.buscarTodos(busca);
 
-    expect(alunos).toEqual(alunoArrMockFiltrado);
+    expect(alunos).toEqual(alunosFiltrados);
   });
 });

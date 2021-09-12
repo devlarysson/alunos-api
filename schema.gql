@@ -11,4 +11,17 @@ type Aluno {
 
 type Query {
   alunos(busca: String): [Aluno!]!
+  aluno(id: Int!): Aluno!
+}
+
+type Mutation {
+  salvarAluno(alunoDados: AlunoInputDTO!): Aluno!
+  removerAluno(id: Int!): Aluno!
+}
+
+input AlunoInputDTO {
+  id: Int
+  nome: String!
+  email: String!
+  cpf: String!
 }

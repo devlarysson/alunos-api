@@ -3,11 +3,8 @@ import { Aluno } from 'src/aluno/entities/aluno.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'laa0609',
-  database: 'alunos',
+  // url: process.env.DATABASE_URL,
+  url: 'postgres://postgres:laa0609@localhost:5432/alunos',
   entities: [Aluno],
   synchronize: true,
 };

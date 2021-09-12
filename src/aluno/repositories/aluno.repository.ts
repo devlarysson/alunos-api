@@ -9,11 +9,7 @@ export class AlunoRepository extends Repository<Aluno> {
 
   filtrarBusca(busca: string): Promise<Aluno[]> {
     return this.find({
-      where: [
-        { nome: ILike(`%${busca}%`) },
-        { email: ILike(`%${busca}%`) },
-        { cpf: ILike(`%${busca}%`) },
-      ],
+      where: [{ nome: ILike(`%${busca}%`) }, { email: ILike(`%${busca}%`) }, { cpf: ILike(`%${busca}%`) }],
     });
   }
 }

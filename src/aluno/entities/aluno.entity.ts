@@ -5,7 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 @Unique(['email', 'cpf'])
 @ObjectType()
 export class Aluno {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   @Field((type) => Int)
   id: number;
 

@@ -9,7 +9,7 @@ services:
       - postgres
     environment: 
       DATABASE_URL: postgres://user:password@postgres:5432/db
-      NODE_ENV: development
+      NODE_ENV: production
       PORT: 3000
     ports:
       - "8000:3000"

@@ -1,6 +1,5 @@
 FROM node:14
 
-# RUN mkdir -p /usr/src/alunos-api
 WORKDIR /usr/src/alunos-api
 
 COPY package*.json ./

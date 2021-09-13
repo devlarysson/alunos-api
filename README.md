@@ -1,6 +1,6 @@
 # Alunos API
 
-Simples API que lista alunos.
+API feita com [NestJS] para integrar com o [alunos-web] utilizando o [GraphQL]
 
 ## Tecnologias utilizadas
 

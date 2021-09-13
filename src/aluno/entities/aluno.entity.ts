@@ -1,8 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-@Unique(['email', 'cpf'])
 @ObjectType()
 export class Aluno {
   @PrimaryGeneratedColumn('increment')

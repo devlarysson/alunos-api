@@ -26,6 +26,8 @@ $ cd alunos-api
 
 # construa e inicie seu container
 $ docker-compose up --build
+
+Rodando na porta 8000
 ```
 
 ## Testes

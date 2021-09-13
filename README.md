@@ -19,7 +19,7 @@ Para clonar e executar a aplicação, você vai precisar do [Git][git], [Docker]
 
 ```bash
 # clone este repositório
-$ git clone git@github.com:devlarysson/productcrud-express.git
+$ git clone git@github.com:devlarysson/alunos-api.git
 
 # entre no diretório da aplicação
 $ cd alunos-api
